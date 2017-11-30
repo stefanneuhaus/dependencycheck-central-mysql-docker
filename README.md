@@ -43,7 +43,7 @@ apply plugin: 'org.owasp.dependencycheck'
 dependencyCheck {
     autoUpdate = false
     data {
-        connectionString = "jdbc:mysql://<DC_HOST>:3307/dependencycheck?useSSL=false"
+        connectionString = "jdbc:mysql://<DC_HOST>:3306/dependencycheck?useSSL=false"
         driver = "com.mysql.jdbc.Driver"
         username = "dc"
         password = "change-me"
