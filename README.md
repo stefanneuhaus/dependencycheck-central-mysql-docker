@@ -1,7 +1,7 @@
 # DependencyCheck Central Database Docker
 
 Docker-based self-updating central [OWASP DependencyCheck](https://www.owasp.org/index.php/OWASP_Dependency_Check) Database Server.
-This is an out-of-the-box solution for the central Enterprise Setup described [here](https://jeremylong.github.io/DependencyCheck/data/database.html).
+This is an out-of-the-box solution for the central Enterprise Setup described [here](https://jeremylong.github.io/DependencyCheck/data/database.html). It is based on a [MySQL](https://hub.docker.com/_/mysql/) database.
 
 ## Benefits
 - Very fast analysis
