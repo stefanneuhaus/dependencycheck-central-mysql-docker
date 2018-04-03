@@ -8,6 +8,7 @@ This is an out-of-the-box solution for the central Enterprise Setup described [h
 - Self-updating, thus always up-to-date CVE data
 - No manual central database setup required
 - Analysis clients do not require internet access (see below)
+- Improved reliability in case of connection issues to the NVD
 
 
 ## Setup
