@@ -18,7 +18,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:3.1.2'
+        classpath 'org.owasp:dependency-check-gradle:3.3.4'
         classpath 'mysql:mysql-connector-java:5.1.44'
     }
 }
