@@ -19,7 +19,7 @@ buildscript {
     }
     dependencies {
         classpath 'org.owasp:dependency-check-gradle:3.1.2'
-        classpath 'mysql:mysql-connector-java:5.1.44'
+        classpath 'mysql:mysql-connector-java:8.0.13'
     }
 }
 
@@ -28,8 +28,8 @@ apply plugin: 'org.owasp.dependencycheck'
 dependencyCheck {
     cveValidForHours = 0
     data {
-        connectionString = "jdbc:mysql://localhost:3306/dependencycheck?useSSL=false"
-        driver = "com.mysql.jdbc.Driver"
+        connectionString = "jdbc:mysql://localhost:3306/dependencycheck?useSSL=false&allowPublicKeyRetrieval=true"
+        driver = "com.mysql.cj.jdbc.Driver"
         username = "dc"
         password = "change-me"
     }

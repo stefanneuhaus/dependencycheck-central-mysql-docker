@@ -1,4 +1,4 @@
-FROM mysql:5.7.20
+FROM mysql:5.7.24
 
 LABEL maintainer="Stefan Neuhaus <stefan@stefanneuhaus.org>"
 
@@ -11,9 +11,10 @@ COPY gradle/wrapper/* /dependencycheck/gradle/wrapper/
 COPY gradlew /dependencycheck/
 
 RUN set -ex && \
-    echo "deb http://http.debian.net/debian jessie-backports main" >/etc/apt/sources.list.d/jessie-backports.list; \
+    echo "deb http://http.debian.net/debian stretch-backports main" >/etc/apt/sources.list.d/stretch-backports.list; \
     apt-get update; \
-    apt-get install -y -t jessie-backports openjdk-8-jre-headless cron; \
+    mkdir -p /usr/share/man/man1; \
+    apt-get install -y -t stretch-backports openjdk-8-jre-headless procps cron; \
     apt-get purge -y --auto-remove; \
     rm -rf /var/lib/apt; \
     /dependencycheck/gradlew --no-daemon wrapper; \
