@@ -16,7 +16,7 @@
 
 /*
  This is a modified version of "initialize_mysql.sql" from OWASP DependencyCheck:
- https://github.com/jeremylong/DependencyCheck/blob/master/dependency-check-core/src/main/resources/data/initialize_mysql.sql
+ https://github.com/jeremylong/DependencyCheck/blob/master/core/src/main/resources/data/initialize_mysql.sql
 
  Modifications applied:
  - Replace hard-coded database user name and password by placeholders
