@@ -18,7 +18,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:3.1.2'
+        classpath 'org.owasp:dependency-check-gradle:3.3.4'
         classpath 'mysql:mysql-connector-java:8.0.13'
     }
 }
@@ -54,7 +54,6 @@ task update {
     group = 'DependencyCheck Database'
     dependsOn([preUpdate, dependencyCheckUpdate, postUpdateSuccess])
 }
-
 
 
 task lastUpdateAttempt {
