@@ -30,8 +30,8 @@ dependencyCheck {
     data {
         connectionString = "jdbc:mysql://localhost:3306/dependencycheck?useSSL=false&allowPublicKeyRetrieval=true"
         driver = "com.mysql.cj.jdbc.Driver"
-        username = "dc"
-        password = "change-me"
+        username = "dc-update"
+        password = "password-is-changed-during-initialization"
     }
 }
 
