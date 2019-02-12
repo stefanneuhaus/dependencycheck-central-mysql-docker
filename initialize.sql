@@ -64,8 +64,3 @@ DELIMITER ;
 
 
 INSERT INTO properties(id, value) VALUES ('version', '3.0');
-
-
-CREATE USER 'dc' IDENTIFIED BY 'change-me';
-GRANT SELECT, INSERT, DELETE, UPDATE ON dependencycheck.* TO 'dc';
-GRANT EXECUTE ON PROCEDURE dependencycheck.save_property TO 'dc';

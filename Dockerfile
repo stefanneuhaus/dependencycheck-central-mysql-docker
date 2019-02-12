@@ -3,7 +3,9 @@ FROM mysql:5.7.25
 LABEL maintainer="Stefan Neuhaus <stefan@stefanneuhaus.org>"
 
 ENV MYSQL_DATABASE=dependencycheck \
-    MYSQL_ROOT_PASSWORD=v3ry-s3cr3t
+    MYSQL_ROOT_PASSWORD=password-is-changed-during-initialization \
+    MYSQL_USER=dc \
+    MYSQL_PASSWORD=dc
 
 WORKDIR /dependencycheck
 
@@ -19,7 +21,12 @@ RUN set -ex && \
     rm -rf /var/lib/apt; \
     /dependencycheck/gradlew --no-daemon wrapper; \
     echo "0 * * * *  /dependencycheck/update.sh" >/etc/cron.d/dependencycheck-database-update; \
-    crontab /etc/cron.d/dependencycheck-database-update
+    crontab /etc/cron.d/dependencycheck-database-update; \
+    cat /dev/urandom | tr -dc _A-Za-z0-9 | head -c 32 >/dependencycheck/dc-update.pwd; \
+    chmod 400 /dependencycheck/dc-update.pwd; \
+    cat /dev/urandom | tr -dc _A-Za-z0-9 | head -c 32 >/dependencycheck/root.pwd; \
+    chmod 400 /dependencycheck/root.pwd; \
+    chown --recursive mysql:mysql /dependencycheck
 
 COPY initialize.sql database.gradle update.sh /dependencycheck/
 COPY initialize.sh /docker-entrypoint-initdb.d/
