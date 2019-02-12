@@ -19,15 +19,13 @@
  https://github.com/jeremylong/DependencyCheck/blob/master/core/src/main/resources/data/initialize_mysql.sql
 
  Modifications applied:
- - Replace hard-coded database user name and password by placeholders
  - Drop and merge statements: the original script evolved over time and provided
    capabilities for upgrading from an older schema definition. This upgrade
    capability is not needed in the Docker context.
+ - Remove setup of security aspects: user, password, and permissions
  - Reorder statements
  - Reformatting
  */
-USE dependencycheck;
-
 CREATE TABLE properties (id varchar(50) PRIMARY KEY, value varchar(500));
 
 CREATE TABLE vulnerability (id int auto_increment PRIMARY KEY, cve VARCHAR(20) UNIQUE,

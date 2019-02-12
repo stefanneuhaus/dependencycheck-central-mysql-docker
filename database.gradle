@@ -31,7 +31,7 @@ dependencyCheck {
         connectionString = "jdbc:mysql://localhost:3306/dependencycheck?useSSL=false&allowPublicKeyRetrieval=true"
         driver = "com.mysql.cj.jdbc.Driver"
         username = "dc-update"
-        password = "password-is-changed-during-initialization"
+        password = "<DC_UPDATE_PASSWORD>"
     }
 }
 
