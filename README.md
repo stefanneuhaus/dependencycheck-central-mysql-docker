@@ -47,7 +47,7 @@ dependencyCheck {
         connectionString = "jdbc:mysql://<DC_HOST>:3306/dependencycheck?useSSL=false&allowPublicKeyRetrieval=true"
         driver = "com.mysql.cj.jdbc.Driver"
         username = "dc"
-        password = "change-me"
+        password = "dc"
     }
 }
 ```
