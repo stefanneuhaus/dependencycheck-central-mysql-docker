@@ -23,7 +23,7 @@ docker run -p 3306:3306 stefanneuhaus/dependencycheck-central-mysql
 ### Analysis clients
 
 All kinds of analysis clients are supported: Gradle, Maven, Ant, Jenkins, CLI. Apply the following changes to your build file:
-- add buildscript dependency for `mysql:mysql-connector-java:8.0.15`
+- add buildscript dependency for `mysql:mysql-connector-java:8.0.16`
 - disable database updates triggered by your project: `autoUpdate = false`
 - add database connection parameters: `data { ... }`
 
@@ -60,7 +60,7 @@ Start the Dependency Analysis:
 
 ## Database updates
 
-Updates of the Database are triggered on the hour. Note that the initial update can take quite some time (~30 min on my machine). In order to get reliable analysis results the initial update must have finished successfully. Subsequent updates are incremental ones and should finish within a couple of seconds.
+Updates of the Database are triggered on the hour. Note that the initial update can take quite some time (~40 min on my machine). In order to get reliable analysis results the initial update must have finished successfully. Subsequent updates are incremental ones and should finish within a couple of seconds.
 
 
 ## Compatibility
