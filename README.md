@@ -35,7 +35,7 @@ buildscript {
     }
     dependencies {
         classpath 'org.owasp:dependency-check-gradle:4.0.2'
-        classpath 'mysql:mysql-connector-java:8.0.15'
+        classpath 'mysql:mysql-connector-java:8.0.16'
     }
 }
 
