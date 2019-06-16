@@ -65,9 +65,19 @@ Updates of the Database are triggered on the hour. Note that the initial update 
 
 ## Compatibility
 
-Plugin versions used in your project to be analyzed (_client_) usually stay compatible to the DependencyCheck Enterprise Docker Database (_server_) for a long time. All client/server combinations with version >= 1.4.1 should work together.
+|           Client |               Server |
+| ---------------: | -------------------: |
+|       `>= 5.0.0` | `latest`, `5`, `5.x` |
+| `[1.4.1; 4.0.2]` |           `4`, `4.x` |
+|        `< 1.4.1` |                 n.a. |
+
+The server is not designed for updating its database structure manually. If you update your client to a version which is incompatible with your server version, 
+you should just throw away the old server container and start a new one from a compatible image from scratch.
+
+* _Client_: DependencyCheck used in your project to be analyzed
+* _Server_: the dependencycheck-central-mysql-docker container
 
 
 ## Notes
 
-- Clients do not require internet access in general. Clients that want to use the so called _"Central Analyzer"_ (enabled per default) need HTTP/HTTPS access in order to connect to [Maven Central Repository](https://search.maven.org/). See [OWASP DependencyCheck documentation](https://jeremylong.github.io/DependencyCheck/data/index.html#Downloading_Additional_Information) for further information.
+- Clients do not require internet access in general. There are only a few analyzers that do require it. Please refer to the [OWASP DependencyCheck documentation](https://jeremylong.github.io/DependencyCheck/data/index.html#Downloading_Additional_Information) for further information.
