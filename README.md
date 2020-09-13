@@ -23,7 +23,7 @@ docker run -p 3306:3306 stefanneuhaus/dependencycheck-central-mysql
 ### Analysis clients
 
 All kinds of analysis clients are supported: Gradle, Maven, Ant, Jenkins, CLI. Apply the following changes to your build file:
-- add buildscript dependency for `mysql:mysql-connector-java:8.0.16`
+- add buildscript dependency for `mysql:mysql-connector-java:8.0.21`
 - disable database updates triggered by your project: `autoUpdate = false`
 - add database connection parameters: `data { ... }`
 
@@ -35,7 +35,7 @@ buildscript {
     }
     dependencies {
         classpath 'org.owasp:dependency-check-gradle:5.0.0'
-        classpath 'mysql:mysql-connector-java:8.0.16'
+        classpath 'mysql:mysql-connector-java:8.0.21'
     }
 }
 

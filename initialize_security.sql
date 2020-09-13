@@ -1,6 +1,3 @@
--- "root" user: change password
-ALTER USER 'root'@'localhost' IDENTIFIED BY '<MYSQL_ROOT_PASSWORD>';
-
 -- "dc-update" user: change password and restrict to local access
 CREATE USER 'dc-update'@127.0.0.1 IDENTIFIED BY '<DC_UPDATE_PASSWORD>';
 GRANT SELECT, INSERT, DELETE, UPDATE ON dependencycheck.* TO 'dc-update'@127.0.0.1;
