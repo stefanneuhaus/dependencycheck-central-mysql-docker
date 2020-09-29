@@ -67,7 +67,8 @@ Updates of the Database are triggered on the hour. Note that the initial update 
 
 |           Client |               Server |
 | ---------------: | -------------------: |
-|       `>= 5.0.0` | `latest`, `5`, `5.x` |
+|       `>= 6.0.0` | `latest`, `6`, `6.x` |
+|  `>= 5.0.0; < 6` |           `5`, `5.x` |
 | `[1.4.1; 4.0.2]` |           `4`, `4.x` |
 |        `< 1.4.1` |                 n.a. |
 
