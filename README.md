@@ -65,12 +65,12 @@ Updates of the Database are triggered on the hour. Note that the initial update 
 
 ## Compatibility
 
-|             Client |               Server |
-| -----------------: | -------------------: |
-|         `>= 6.0.2` | `latest`, `6`, `6.x` |
-| `[5.0.0; 5.3.2.1]` |           `5`, `5.x` |
-|   `[1.4.1; 4.0.2]` |           `4`, `4.x` |
-|          `< 1.4.1` |                 n.a. |
+|             Client |                 Server |
+| -----------------: | ---------------------: |
+|         `>= 6.0.2` | `latest`, `6`, `6.x.x` |
+| `[5.0.0; 5.3.2.1]` |           `5`, `5.x.x` |
+|   `[1.4.1; 4.0.2]` |           `4`, `4.x.x` |
+|          `< 1.4.1` |                   n.a. |
 
 The server is not designed for updating its database structure manually. If you update your client to a version which is incompatible with your server version, 
 you should just throw away the old server container and start a new one from a compatible image from scratch.
