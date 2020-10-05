@@ -47,7 +47,8 @@ CREATE TABLE cpeEntry (id INT auto_increment PRIMARY KEY, part CHAR(1), vendor V
 CREATE TABLE software (cveid INT, cpeEntryId INT, versionEndExcluding VARCHAR(50), versionEndIncluding VARCHAR(50),
   versionStartExcluding VARCHAR(50), versionStartIncluding VARCHAR(50), vulnerable BOOLEAN,
   CONSTRAINT fkSoftwareCve FOREIGN KEY (cveid) REFERENCES vulnerability(id) ON DELETE CASCADE,
-  CONSTRAINT fkSoftwareCpeProduct FOREIGN KEY (cpeEntryId) REFERENCES cpeEntry(id));
+  CONSTRAINT fkSoftwareCpeProduct FOREIGN KEY (cpeEntryId) REFERENCES cpeEntry(id),
+  PRIMARY KEY (cveid, cpeEntryId));
 
 CREATE TABLE cweEntry (cveid INT, cwe VARCHAR(20),
   CONSTRAINT fkCweEntry FOREIGN KEY (cveid) REFERENCES vulnerability(id) ON DELETE CASCADE);
@@ -63,11 +64,36 @@ CREATE INDEX idxSoftwareCpe ON software(cpeEntryId);
 
 
 DELIMITER //
+
 CREATE PROCEDURE save_property
 (IN prop varchar(50), IN val varchar(500))
 BEGIN
 INSERT INTO properties (`id`, `value`) VALUES (prop, val)
   ON DUPLICATE KEY UPDATE `value`=val;
+END //
+
+
+CREATE PROCEDURE update_ecosystems()
+BEGIN
+SET SQL_SAFE_UPDATES = 0;
+UPDATE cpeEntry n INNER JOIN
+    (SELECT DISTINCT vendor, product, MIN(ecosystem) eco
+    FROM cpeEntry
+    WHERE ecosystem IS NOT NULL
+    GROUP BY vendor , product) e
+  ON e.vendor = n.vendor
+  AND e.product = n.product
+SET n.ecosystem = e.eco
+WHERE n.ecosystem IS NULL;
+SET SQL_SAFE_UPDATES = 1;
+END //
+
+
+CREATE PROCEDURE cleanup_orphans()
+BEGIN
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM cpeEntry WHERE id not in (SELECT CPEEntryId FROM software);
+SET SQL_SAFE_UPDATES = 1;
 END //
 DELIMITER ;
 
