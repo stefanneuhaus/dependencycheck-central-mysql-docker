@@ -1,6 +1,6 @@
-*.bat                                       text eol=crlf
-gradlew                                     text eol=lf
-gradle/wrapper/gradle-wrapper.properties    text eol=lf
-*.gradle                                    text eol=lf
-*.sh                                        text eol=lf
-*.sql                                       text eol=lf
+*.bat                                        text eol=crlf
+/gradle/wrapper/gradle-wrapper.properties    text eol=lf
+gradlew                                      text eol=lf
+database.gradle                              text eol=lf
+*.sh                                         text eol=lf
+*.sql                                        text eol=lf
