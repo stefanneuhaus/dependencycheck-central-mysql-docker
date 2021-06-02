@@ -12,6 +12,7 @@ WORKDIR /dependencycheck
 
 COPY gradle/wrapper/* /dependencycheck/gradle/wrapper/
 COPY gradlew /dependencycheck/
+COPY settings.gradle /dependencycheck/
 
 RUN set -ex && \
     echo "deb http://http.debian.net/debian buster-backports main" >/etc/apt/sources.list.d/buster-backports.list; \
