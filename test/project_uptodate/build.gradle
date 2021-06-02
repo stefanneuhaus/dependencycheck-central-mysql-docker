@@ -1,0 +1,30 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.owasp:dependency-check-gradle:6.2.0'
+        classpath 'mysql:mysql-connector-java:8.0.25'
+    }
+}
+
+apply plugin: 'org.owasp.dependencycheck'
+
+dependencyCheck {
+    autoUpdate = false
+    data {
+        connectionString = "jdbc:mysql://localhost:3306/dependencycheck?useSSL=false&allowPublicKeyRetrieval=true"
+        driver = "com.mysql.cj.jdbc.Driver"
+        username = "dc"
+        password = "dc"
+    }
+}
+
+
+apply plugin: 'java'
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compileOnly 'com.fasterxml.jackson.core:jackson-databind:2.9.9.3'
+}
