@@ -34,7 +34,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:6.0.2'
+        classpath 'org.owasp:dependency-check-gradle:6.2.0'
         classpath 'mysql:mysql-connector-java:8.0.21'
     }
 }
@@ -67,7 +67,8 @@ Updates of the Database are triggered on the hour. Note that the initial update 
 
 |             Client |                 Server |
 | -----------------: | ---------------------: |
-|         `>= 6.0.2` | `latest`, `6`, `6.x.x` |
+|         `>= 6.1.3` | `latest`, `6`, `6.2.x` |
+|   `[6.0.0; 6.1.1]` |                `6.0.2` |
 | `[5.0.0; 5.3.2.1]` |           `5`, `5.x.x` |
 |   `[1.4.1; 4.0.2]` |           `4`, `4.x.x` |
 |          `< 1.4.1` |                   n.a. |
