@@ -60,7 +60,7 @@ Start the Dependency Analysis:
 
 ## Database updates
 
-Updates of the Database are triggered on the hour. Note that the initial update can take quite some time (~3 h on my machine). In order to get reliable analysis results the initial update must have finished successfully. Subsequent updates are incremental ones and should finish within a couple of seconds.
+Updates of the Database are triggered on the hour. Note that the initial update can take quite some time (~90 min on my machine). In order to get reliable analysis results the initial update must have finished successfully. Subsequent updates are incremental ones and should finish within a couple of seconds.
 
 
 ## Compatibility
