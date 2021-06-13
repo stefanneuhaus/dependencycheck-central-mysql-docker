@@ -83,3 +83,4 @@ you should just throw away the old server container and start a new one from a c
 ## Notes
 
 - Clients do not require internet access in general. There are only a few analyzers that do require it. Please refer to the [OWASP DependencyCheck documentation](https://jeremylong.github.io/DependencyCheck/data/index.html#Downloading_Additional_Information) for further information.
+- Running the image as non-root: use the mysql(999:999) user provided by the base image (mysql).
