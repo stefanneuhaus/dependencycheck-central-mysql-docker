@@ -1,4 +1,4 @@
-FROM debian:stable-slim@sha256:db5d246d767a1daf54aecdf0e888925e78174b2051bc571337e1ae72aa722b5d AS supercronic
+FROM debian:stable-20220125-slim AS supercronic
 
 ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.1.12/supercronic-linux-amd64 \
     SUPERCRONIC=supercronic-linux-amd64 \
