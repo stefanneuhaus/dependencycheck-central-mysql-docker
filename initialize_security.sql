@@ -1,6 +1,6 @@
 -- "dc-update" user: change password and restrict to local access
 CREATE USER 'dc-update'@127.0.0.1 IDENTIFIED BY '<DC_UPDATE_PASSWORD>';
-GRANT SELECT, INSERT, DELETE, UPDATE ON dependencycheck.* TO 'dc-update'@127.0.0.1;
+GRANT SELECT, INSERT, UPDATE, DELETE ON dependencycheck.* TO 'dc-update'@127.0.0.1;
 GRANT EXECUTE ON PROCEDURE dependencycheck.save_property TO 'dc-update'@127.0.0.1;
 GRANT EXECUTE ON PROCEDURE dependencycheck.merge_ecosystem TO 'dc-update'@127.0.0.1;
 GRANT EXECUTE ON PROCEDURE dependencycheck.cleanup_orphans TO 'dc-update'@127.0.0.1;

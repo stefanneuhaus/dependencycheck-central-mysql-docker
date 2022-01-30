@@ -45,8 +45,8 @@ CREATE TABLE cpeEntry (id INT auto_increment PRIMARY KEY, part CHAR(1), vendor V
 version VARCHAR(255), update_version VARCHAR(255), edition VARCHAR(255), lang VARCHAR(20), sw_edition VARCHAR(255), 
 target_sw VARCHAR(255), target_hw VARCHAR(255), other VARCHAR(255), ecosystem VARCHAR(255));
 
-CREATE TABLE software (cveid INT, cpeEntryId INT, versionEndExcluding VARCHAR(50), versionEndIncluding VARCHAR(50), 
-                       versionStartExcluding VARCHAR(50), versionStartIncluding VARCHAR(50), vulnerable BOOLEAN
+CREATE TABLE software (cveid INT, cpeEntryId INT, versionEndExcluding VARCHAR(60), versionEndIncluding VARCHAR(60),
+                       versionStartExcluding VARCHAR(60), versionStartIncluding VARCHAR(60), vulnerable BOOLEAN
     , CONSTRAINT fkSoftwareCve FOREIGN KEY (cveid) REFERENCES vulnerability(id) ON DELETE CASCADE
     , CONSTRAINT fkSoftwareCpeProduct FOREIGN KEY (cpeEntryId) REFERENCES cpeEntry(id));
     
@@ -111,6 +111,8 @@ CREATE PROCEDURE update_vulnerability (
 BEGIN
 DECLARE vulnerabilityId INT DEFAULT 0;
 
+START TRANSACTION;
+
 SET @OLD_SQL_SAFE_UPDATES = (SELECT @@SQL_SAFE_UPDATES);
 SET @OLD_SQL_MODE = @@sql_mode;
 SET SQL_SAFE_UPDATES = 0;
@@ -163,6 +165,8 @@ END IF;
 SET SQL_SAFE_UPDATES = @OLD_SQL_SAFE_UPDATES;
 SET SQL_MODE = @OLD_SQL_MODE;
 
+COMMIT;
+
 SELECT vulnerabilityId;
 
 END //
@@ -179,6 +183,8 @@ BEGIN
     DECLARE cpeId INT DEFAULT 0;
     DECLARE currentEcosystem VARCHAR(255);
 
+    START TRANSACTION;
+
     SET @OLD_SQL_SAFE_UPDATES = (SELECT @@SQL_SAFE_UPDATES);
     SET SQL_SAFE_UPDATES = 0;
 
@@ -187,7 +193,8 @@ BEGIN
     FROM cpeEntry WHERE `part`=p_part AND `vendor`=p_vendor AND `product`=p_product
         AND `version`=p_version AND `update_version`=p_update_version AND `edition`=p_edition 
         AND `lang`=p_lang AND `sw_edition`=p_sw_edition AND `target_sw`=p_target_sw 
-        AND `target_hw`=p_target_hw AND `other`=p_other;
+        AND `target_hw`=p_target_hw AND `other`=p_other
+    LIMIT 1;
 
     IF cpeId > 0 THEN
         IF currentEcosystem IS NULL AND p_ecosystem IS NOT NULL THEN
@@ -206,7 +213,8 @@ BEGIN
     VALUES (p_vulnerabilityId, cpeId, p_versionEndExcluding, p_versionEndIncluding,
             p_versionStartExcluding, p_versionStartIncluding, p_vulnerable);
 
-SET SQL_SAFE_UPDATES = @OLD_SQL_SAFE_UPDATES;
+    SET SQL_SAFE_UPDATES = @OLD_SQL_SAFE_UPDATES;
+    COMMIT;
 
 END //
 
