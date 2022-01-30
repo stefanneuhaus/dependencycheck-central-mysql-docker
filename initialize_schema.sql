@@ -241,4 +241,4 @@ END //
 DELIMITER ;
 
 
-INSERT INTO properties(id, value) VALUES ('version', '5.1');
+INSERT INTO properties(id, value) VALUES ('version', '5.2');
