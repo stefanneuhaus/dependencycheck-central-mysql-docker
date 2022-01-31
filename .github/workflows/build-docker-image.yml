@@ -9,6 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Build Docker image
       - uses: actions/checkout@v2
+
+      - name: Build Docker image
         run: docker build -t dependencycheck-central-mysql:$(date +%s) .
