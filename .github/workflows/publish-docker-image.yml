@@ -1,0 +1,21 @@
+name: Publish to DockerHub
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Docker image
+        uses: actions/checkout@v2
+        run: docker build -t stefanneuhaus/dependencycheck-central-mysql:${{ github.event.release.tag_name }} stefanneuhaus/dependencycheck-central-mysql:latest .
+
+      - name: Login and push to DockerHub
+        env:
+          - DH_PWD: ${{ secrets.DOCKERHUB_PASSWORD }}
+        run: |
+          echo $DH_PWD | docker login -u stefanneuhaus --password-stdin registry.docker.io
+          docker push --all-tags stefanneuhaus/dependencycheck-central-mysql

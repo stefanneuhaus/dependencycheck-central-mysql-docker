@@ -3,12 +3,12 @@ name: Build Docker Image
 on:
   push:
   pull_request:
-    branches: [ master ]
+    branches: master
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Build the Docker image
+      - name: Build Docker image
+        uses: actions/checkout@v2
         run: docker build -t dependencycheck-central-mysql:$(date +%s) .
