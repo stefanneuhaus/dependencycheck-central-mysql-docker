@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build Docker image
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         run: docker build -t stefanneuhaus/dependencycheck-central-mysql:${{ github.event.release.tag_name }} stefanneuhaus/dependencycheck-central-mysql:latest .
 
       - name: Login and push to DockerHub
