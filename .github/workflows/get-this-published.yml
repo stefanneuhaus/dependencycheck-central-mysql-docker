@@ -12,7 +12,8 @@ jobs:
       - uses: actions/checkout@v2
 
 
-      - uses: actions/github-script@v5
+      - name: Prepare tag
+        uses: actions/github-script@v5
         with:
           script: |
 #            const tagName = github.event.release.tag_name
