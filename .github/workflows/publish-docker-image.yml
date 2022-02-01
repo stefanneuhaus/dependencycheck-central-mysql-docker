@@ -2,7 +2,7 @@ name: Publish to DockerHub
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dummy ]
 
 jobs:
   publish:
