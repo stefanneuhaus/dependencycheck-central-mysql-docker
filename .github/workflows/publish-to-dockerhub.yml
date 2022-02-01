@@ -1,8 +1,11 @@
-name: Publish to DockerHub v2
+name: Publish to DockerHub
 
 on:
   release:
-    types: [ published, created, prereleased ]
+    types:
+      - published
+      - created
+      - prereleased
 
 jobs:
   publish:
