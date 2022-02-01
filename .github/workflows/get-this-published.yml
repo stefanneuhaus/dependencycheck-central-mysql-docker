@@ -20,15 +20,12 @@ jobs:
             console.log("Publishing with Docker tag: " + tag)
             return tag
 
-      - name: Use tag
-        run: echo ${{ steps.set-tag.outputs.result }}
+      - name: Build Docker image
+        run: docker build -t stefanneuhaus/dependencycheck-central-mysql:${{ steps.set-tag.outputs.result }} stefanneuhaus/dependencycheck-central-mysql:latest .
 
-#      - name: Build Docker image
-#        run: docker build -t stefanneuhaus/dependencycheck-central-mysql:${{ tag }} stefanneuhaus/dependencycheck-central-mysql:latest .
-
-#      - name: Login and push to DockerHub
-#        env:
-#          DH_PWD: ${{ secrets.DOCKERHUB_PASSWORD }}
-#        run: |
-#          echo $DH_PWD | docker login -u stefanneuhaus --password-stdin registry.docker.io
-#          docker push --all-tags stefanneuhaus/dependencycheck-central-mysql
+      - name: Login and push to DockerHub
+        env:
+          DH_PWD: ${{ secrets.DOCKERHUB_PASSWORD }}
+        run: |
+          echo $DH_PWD | docker login -u stefanneuhaus --password-stdin registry.docker.io
+          docker push --all-tags stefanneuhaus/dependencycheck-central-mysql
