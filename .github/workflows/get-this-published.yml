@@ -1,8 +1,9 @@
 name: Publish to DockerHub
 
 on:
-  release:
-    types: [ published, created, prereleased ]
+  workflow_dispatch
+#  release:
+#    types: [ published, created, prereleased ]
 
 jobs:
   publish:
@@ -13,6 +14,8 @@ jobs:
       - uses: actions/github-script@v5
         with:
           script: |
+#            const tagName = github.event.release.tag_name
+            const tagName = v6.1.7
             const tag = github.event.release.tag_name.replace('v', '')
             console.log(tag)
 
