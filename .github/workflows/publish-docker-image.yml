@@ -1,0 +1,12 @@
+name: Publish to DockerHub
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hopefully the workflow is now snytacticall correct and Github stops complaining ...
+        uses: actions/checkout@v2
