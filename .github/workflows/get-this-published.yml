@@ -17,7 +17,6 @@ jobs:
         with:
           result-encoding: string
           script: |
-#            const tagName = github.event.release.tag_name
             const tagName = 'v6.1.7'
             const tag = github.event.release.tag_name.replace('v', '')
             console.log(tag)
