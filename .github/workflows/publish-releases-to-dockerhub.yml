@@ -26,5 +26,5 @@ jobs:
         env:
           DH_PWD: ${{ secrets.DOCKERHUB_PASSWORD }}
         run: |
-          echo $DH_PWD | docker login -u stefanneuhaus --password-stdin registry.docker.io
+          echo $DH_PWD | docker login -u stefanneuhaus --password-stdin
           docker push --all-tags stefanneuhaus/dependencycheck-central-mysql
