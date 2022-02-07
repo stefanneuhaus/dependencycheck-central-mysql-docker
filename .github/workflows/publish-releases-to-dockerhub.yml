@@ -10,6 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Event context
+        env:
+          EVENT: ${{ toJSON(github.event) }}
+        run: |
+          echo "$EVENT"
+
       - uses: actions/github-script@v5
         id: determine-tag
         with:
