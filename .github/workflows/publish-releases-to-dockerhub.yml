@@ -2,7 +2,7 @@ name: Publish Releases to DockerHub
 
 on:
   release:
-    types: [ released ]
+    types: [ released, prereleased ]
 
 jobs:
   publish:
