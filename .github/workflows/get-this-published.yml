@@ -1,0 +1,31 @@
+name: Publish to DockerHub
+
+on:
+  release:
+    types: [ published, created, prereleased ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/github-script@v5
+        id: set-tag
+        with:
+          result-encoding: string
+          script: |
+            const tagName = github.event.release.tag_name
+            const tag = tagName.replace('v', '')
+            console.log("Publishing with Docker tag: " + tag)
+            return tag
+
+      - name: Build Docker image
+        run: docker build -t stefanneuhaus/dependencycheck-central-mysql:${{ steps.set-tag.outputs.result }} stefanneuhaus/dependencycheck-central-mysql:latest .
+
+      - name: Login and push to DockerHub
+        env:
+          DH_PWD: ${{ secrets.DOCKERHUB_PASSWORD }}
+        run: |
+          echo $DH_PWD | docker login -u stefanneuhaus --password-stdin registry.docker.io
+          docker push --all-tags stefanneuhaus/dependencycheck-central-mysql
