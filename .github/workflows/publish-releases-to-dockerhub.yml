@@ -17,22 +17,10 @@ jobs:
           echo "$EVENT"
 
       - uses: actions/github-script@v5
-        with:
-          script: |
-            console.log(github)
-            console.log(${{ github }})
-
-      - uses: actions/github-script@v5
-        with:
-          script: |
-            console.log(github.event)
-            console.log(${{ github.event }})
-
-      - uses: actions/github-script@v5
         id: determine-tag
         with:
           script: |
-            const tag = github.event.release.tag_name.replace('v', '')
+            const tag = ${{ github.event.release.tag_name.replace('v', '') }}
             console.log('Publishing release ' + tag)
             return tag
           result-encoding: string
