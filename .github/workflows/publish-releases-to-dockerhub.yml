@@ -20,7 +20,7 @@ jobs:
           result-encoding: string
 
       - name: Build Docker image
-        run: docker build . -t stefanneuhaus/dependencycheck-central-mysql:${{ steps.determine-tag.outputs.result }} stefanneuhaus/dependencycheck-central-mysql:latest
+        run: docker build -t stefanneuhaus/dependencycheck-central-mysql:${{ steps.determine-tag.outputs.result }} -t stefanneuhaus/dependencycheck-central-mysql:latest .
 
       - name: Login and push to DockerHub
         env:
