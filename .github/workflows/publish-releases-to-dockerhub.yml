@@ -17,6 +17,16 @@ jobs:
           echo "$EVENT"
 
       - uses: actions/github-script@v5
+        with:
+          script: |
+            console.log(github)
+
+      - uses: actions/github-script@v5
+        with:
+          script: |
+            console.log(github.event)
+
+      - uses: actions/github-script@v5
         id: determine-tag
         with:
           script: |
