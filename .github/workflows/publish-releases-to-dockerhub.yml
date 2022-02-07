@@ -2,19 +2,13 @@ name: Publish Releases to DockerHub
 
 on:
   release:
-    types: [ released, prereleased, deleted ]
+    types: [ released, prereleased ]
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - name: Event context
-        env:
-          EVENT: ${{ toJSON(github.event) }}
-        run: |
-          echo "$EVENT"
 
       - uses: actions/github-script@v5
         id: determine-tag
@@ -26,7 +20,7 @@ jobs:
           result-encoding: string
 
       - name: Build Docker image
-        run: docker build -t stefanneuhaus/dependencycheck-central-mysql:${{ steps.determine-tag.outputs.result }} stefanneuhaus/dependencycheck-central-mysql:latest .
+        run: docker build . -t stefanneuhaus/dependencycheck-central-mysql:${{ steps.determine-tag.outputs.result }} stefanneuhaus/dependencycheck-central-mysql:latest
 
       - name: Login and push to DockerHub
         env:
