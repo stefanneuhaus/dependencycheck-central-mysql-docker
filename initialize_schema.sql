@@ -58,6 +58,7 @@ INSERT INTO cpeEcosystemCache (vendor, product, ecosystem) VALUES ('apache', 'zo
 INSERT INTO cpeEcosystemCache (vendor, product, ecosystem) VALUES ('tensorflow', 'tensorflow', 'MULTIPLE');
 INSERT INTO cpeEcosystemCache (vendor, product, ecosystem) VALUES ('scikit-learn', 'scikit-learn', 'MULTIPLE');
 INSERT INTO cpeEcosystemCache (vendor, product, ecosystem) VALUES ('unicode', 'international_components_for_unicode', 'MULTIPLE');
+INSERT INTO cpeEcosystemCache (vendor, product, ecosystem) VALUES ('icu-project', 'international_components_for_unicode', 'MULTIPLE');
 
 CREATE INDEX idxCwe ON cweEntry(cveid);
 CREATE INDEX idxVulnerability ON vulnerability(cve);
@@ -248,7 +249,5 @@ BEGIN
     SET SQL_SAFE_UPDATES = @OLD_SQL_SAFE_UPDATES;
 END //
 DELIMITER ;
-
-UPDATE cpeEcosystemCache set ecosystem='MULTIPLE' where vendor = 'icu-project' and product = 'international_components_for_unicode';
 
 INSERT INTO properties(id, value) VALUES ('version', '5.2.1');
