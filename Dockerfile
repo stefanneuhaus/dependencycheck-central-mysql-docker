@@ -13,7 +13,7 @@ RUN apt-get update; apt-get install -y curl \
 
 
 
-FROM mysql:5.7.37
+FROM mysql:5.7.39-debian
 
 LABEL maintainer="Stefan Neuhaus <stefan@stefanneuhaus.org>"
 
