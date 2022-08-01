@@ -37,7 +37,7 @@ RUN set -ex && \
     apt-get purge -y --auto-remove; \
     rm -rf /var/lib/apt; \
     /dependencycheck/gradlew --no-daemon wrapper; \
-    echo "0 * * * *  /dependencycheck/update.sh" > /dependencycheck/dependencycheck-database-update; \
+    echo "0 * * * *  /dependencycheck/update.sh" > /dependencycheck/database-update-schedule; \
     cat /dev/urandom | tr -dc _A-Za-z0-9 | head -c 32 >/dependencycheck/dc-update.pwd; \
     chmod 400 /dependencycheck/dc-update.pwd; \
     chown --recursive mysql:mysql /dependencycheck

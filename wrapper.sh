@@ -1,4 +1,4 @@
 #!/bin/sh
 
-supercronic /dependencycheck/dependencycheck-database-update &
+supercronic /dependencycheck/database-update-schedule &
 /usr/local/bin/docker-entrypoint.sh --user=root
