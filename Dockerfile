@@ -1,4 +1,4 @@
-FROM debian:stable-20220125-slim AS supercronic
+FROM debian:stable-20221219-slim AS supercronic
 
 ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.2.1/supercronic-linux-amd64 \
     SUPERCRONIC=supercronic-linux-amd64 \
@@ -13,7 +13,7 @@ RUN apt-get update; apt-get install -y curl \
 
 
 
-FROM mysql:5.7.39-debian
+FROM mysql:5.7.40-debian
 
 LABEL maintainer="Stefan Neuhaus <stefan@stefanneuhaus.org>"
 
