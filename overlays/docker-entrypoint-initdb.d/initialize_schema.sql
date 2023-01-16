@@ -60,6 +60,16 @@ INSERT INTO cpeEcosystemCache (vendor, product, ecosystem) VALUES ('scikit-learn
 INSERT INTO cpeEcosystemCache (vendor, product, ecosystem) VALUES ('unicode', 'international_components_for_unicode', 'MULTIPLE');
 INSERT INTO cpeEcosystemCache (vendor, product, ecosystem) VALUES ('icu-project', 'international_components_for_unicode', 'MULTIPLE');
 
+CREATE TABLE knownExploited (cveID varchar(20) PRIMARY KEY ,
+    vendorProject VARCHAR(255),
+    product VARCHAR(255),
+    vulnerabilityName VARCHAR(500),
+    dateAdded CHAR(10),
+    shortDescription VARCHAR(2000),
+    requiredAction VARCHAR(1000),
+    dueDate CHAR(10),
+    notes VARCHAR(2000));
+
 CREATE INDEX idxCwe ON cweEntry(cveid);
 CREATE INDEX idxVulnerability ON vulnerability(cve);
 CREATE INDEX idxReference ON `reference`(cveid);
@@ -248,6 +258,27 @@ BEGIN
 
     SET SQL_SAFE_UPDATES = @OLD_SQL_SAFE_UPDATES;
 END //
+
+CREATE PROCEDURE merge_knownexploited
+(IN p_cveID varchar(20),
+ IN p_vendorProject VARCHAR(255),
+ IN p_product VARCHAR(255),
+ IN p_vulnerabilityName VARCHAR(500),
+ IN p_dateAdded CHAR(10),
+ IN p_shortDescription VARCHAR(2000),
+ IN p_requiredAction VARCHAR(1000),
+ IN p_dueDate CHAR(10),
+ IN p_notes VARCHAR(2000))
+BEGIN
+INSERT INTO knownExploited (`cveID`, `vendorProject`, `product`, `vulnerabilityName`,
+            `dateAdded`, `shortDescription`, `requiredAction`, `dueDate`, `notes`) 
+       VALUES (p_cveID, p_vendorProject, p_product, p_vulnerabilityName, p_dateAdded,
+            p_shortDescription, p_requiredAction, p_dueDate, p_notes)
+       ON DUPLICATE KEY UPDATE `vendorProject`=p_vendorProject, `product`=p_product,
+            `vulnerabilityName`=p_vulnerabilityName, `dateAdded`=p_dateAdded,
+            `shortDescription`=p_shortDescription, `requiredAction`=p_requiredAction, 
+            `dueDate`=p_dueDate, `notes`=p_notes;
+END //
 DELIMITER ;
 
-INSERT INTO properties(id, value) VALUES ('version', '5.3');
+INSERT INTO properties(id, value) VALUES ('version', '5.4');
