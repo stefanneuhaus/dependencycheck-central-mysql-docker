@@ -60,7 +60,7 @@ INSERT INTO cpeEcosystemCache (vendor, product, ecosystem) VALUES ('scikit-learn
 INSERT INTO cpeEcosystemCache (vendor, product, ecosystem) VALUES ('unicode', 'international_components_for_unicode', 'MULTIPLE');
 INSERT INTO cpeEcosystemCache (vendor, product, ecosystem) VALUES ('icu-project', 'international_components_for_unicode', 'MULTIPLE');
 
-CREATE TABLE knownExploited (cveID varchar(20) PRIMARY KEY ,
+CREATE TABLE knownExploited (cveID varchar(20) PRIMARY KEY,
     vendorProject VARCHAR(255),
     product VARCHAR(255),
     vulnerabilityName VARCHAR(500),
@@ -259,6 +259,7 @@ BEGIN
     SET SQL_SAFE_UPDATES = @OLD_SQL_SAFE_UPDATES;
 END //
 
+
 CREATE PROCEDURE merge_knownexploited
 (IN p_cveID varchar(20),
  IN p_vendorProject VARCHAR(255),
@@ -279,6 +280,7 @@ INSERT INTO knownExploited (`cveID`, `vendorProject`, `product`, `vulnerabilityN
             `shortDescription`=p_shortDescription, `requiredAction`=p_requiredAction, 
             `dueDate`=p_dueDate, `notes`=p_notes;
 END //
+
 DELIMITER ;
 
 INSERT INTO properties(id, value) VALUES ('version', '5.4');
