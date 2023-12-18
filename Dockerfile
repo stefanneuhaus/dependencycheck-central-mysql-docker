@@ -38,7 +38,7 @@ COPY overlays/docker-entrypoint-initdb.d /docker-entrypoint-initdb.d/
 
 RUN set -ex && \
     /dependencycheck/gradlew wrapper; \
-    echo "0 * * * *  /dependencycheck/update.sh" > /dependencycheck/database-update-schedule; \
+    echo "0/2 * * * *  /dependencycheck/update.sh" > /dependencycheck/database-update-schedule; \
     chown --recursive mysql:mysql /dependencycheck
 
 COPY --from=supercronic /usr/local/bin/supercronic /usr/local/bin/
