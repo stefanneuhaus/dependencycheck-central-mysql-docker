@@ -20,6 +20,12 @@ In order to start the Database Server simply run
 docker run -p 3306:3306 stefanneuhaus/dependencycheck-central-mysql
 ```
 
+#### NVD API key
+
+To have a faster synchronization proces, you should apply for an NVD API key.
+Get one [at the NVD website](https://nvd.nist.gov/developers/request-an-api-key).
+If you have one, start your Docker container with `-e NVD_API_KEY=<Your API key here>`.
+
 ### Analysis clients
 
 All kinds of analysis clients are supported: Gradle, Maven, Ant, Jenkins, CLI. Apply the following changes to your build file:
@@ -34,7 +40,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:8.0.0'
+        classpath 'org.owasp:dependency-check-gradle:9.0.6'
         classpath 'com.mysql:mysql-connector-j:8.2.0'
     }
 }

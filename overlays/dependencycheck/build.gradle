@@ -18,7 +18,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:8.0.0'
+        classpath 'org.owasp:dependency-check-gradle:9.0.6'
         classpath 'com.mysql:mysql-connector-j:8.2.0'
     }
 }
@@ -26,12 +26,15 @@ buildscript {
 apply plugin: 'org.owasp.dependencycheck'
 
 dependencyCheck {
-    cveValidForHours = 0
     data {
         connectionString = "jdbc:mysql://localhost:3306/dependencycheck?useSSL=false&allowPublicKeyRetrieval=true"
         driver = "com.mysql.cj.jdbc.Driver"
         username = "dc-update"
         password = "<DC_UPDATE_PASSWORD>"
+    }
+    nvd {
+        validForHours = 0
+        apiKey = System.getenv("NVD_API_KEY") ?: ""
     }
 }
 
