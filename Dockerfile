@@ -1,4 +1,4 @@
-FROM debian:stable-20230109-slim AS supercronic
+FROM debian:bullseye-slim AS supercronic
 
 ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.2.1/supercronic-linux-amd64 \
     SUPERCRONIC=supercronic-linux-amd64 \
@@ -13,7 +13,7 @@ RUN apt-get update; apt-get install -y curl \
 
 
 
-FROM mysql:5.7.41-debian
+FROM mysql:8.0.35-debian
 
 LABEL maintainer="Stefan Neuhaus <stefan@stefanneuhaus.org>"
 
@@ -26,7 +26,6 @@ ENV MYSQL_DATABASE=dependencycheck \
 WORKDIR /dependencycheck
 
 RUN set -ex && \
-    echo "deb http://http.debian.net/debian buster-backports main" >/etc/apt/sources.list.d/buster-backports.list; \
     apt-get update; \
     mkdir -p /usr/share/man/man1; \
     apt-get install -y openjdk-11-jre-headless procps cron; \
