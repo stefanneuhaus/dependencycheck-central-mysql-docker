@@ -66,13 +66,14 @@ Start the Dependency Analysis:
 
 ## Database updates
 
-Updates of the Database are triggered on the hour. Note that the initial update can take quite some time (~90 min on my machine). In order to get reliable analysis results the initial update must have finished successfully. Subsequent updates are incremental ones and should finish within a couple of seconds.
+Updates of the Database are triggered every 2 minutes. Note that the initial update can take quite some time (~50 min on my machine). In order to get reliable analysis results the initial update must have finished successfully. Subsequent updates are incremental ones and should finish within a couple of seconds.
 
 
 ## Compatibility
 
 |             Client |  Server |
 |-------------------:|--------:|
+|         `>= 8.0.0` | `9.0.6` |
 |         `>= 8.0.0` | `8.0.0` |
 |            `7.4.4` | `7.4.4` |
 |   `[6.3.0; 7.4.3]` | `6.5.3` |

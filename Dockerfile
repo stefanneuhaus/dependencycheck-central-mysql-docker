@@ -1,8 +1,8 @@
 FROM debian:bullseye-slim AS supercronic
 
-ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.2.1/supercronic-linux-amd64 \
+ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.2.29/supercronic-linux-amd64 \
     SUPERCRONIC=supercronic-linux-amd64 \
-    SUPERCRONIC_SHA1SUM=d7f4c0886eb85249ad05ed592902fa6865bb9d70
+    SUPERCRONIC_SHA1SUM=cd48d45c4b10f3f0bfdd3a57d054cd05ac96812b
 
 RUN apt-get update; apt-get install -y curl \
  && curl -fsSLO "$SUPERCRONIC_URL" \
@@ -10,7 +10,6 @@ RUN apt-get update; apt-get install -y curl \
  && chmod +x "$SUPERCRONIC" \
  && mv "$SUPERCRONIC" "/usr/local/bin/${SUPERCRONIC}" \
  && ln -s "/usr/local/bin/${SUPERCRONIC}" /usr/local/bin/supercronic
-
 
 
 FROM mysql:8.0.35-debian
@@ -27,8 +26,7 @@ WORKDIR /dependencycheck
 
 RUN set -ex && \
     apt-get update; \
-    mkdir -p /usr/share/man/man1; \
-    apt-get install -y openjdk-11-jre-headless procps cron; \
+    apt-get install -y openjdk-17-jre-headless procps; \
     apt-get purge -y --auto-remove; \
     rm -rf /var/lib/apt
 
@@ -46,8 +44,8 @@ COPY --from=supercronic /usr/local/bin/supercronic /usr/local/bin/
 RUN set -ex && \
     cat /dev/urandom | tr -dc _A-Za-z0-9 | head -c 32 >/dependencycheck/dc-update.pwd; \
     chmod 400 /dependencycheck/dc-update.pwd; \
-    sed -i "s/<DC_UPDATE_PASSWORD>/`cat /dependencycheck/dc-update.pwd`/" /dependencycheck/build.gradle; \
-    sed -i "s/<DC_UPDATE_PASSWORD>/`cat /dependencycheck/dc-update.pwd`/" /docker-entrypoint-initdb.d/initialize_security.sql; \
+    sed -i "s/<DC_UPDATE_PASSWORD>/$(cat /dependencycheck/dc-update.pwd)/" /dependencycheck/build.gradle; \
+    sed -i "s/<DC_UPDATE_PASSWORD>/$(cat /dependencycheck/dc-update.pwd)/" /docker-entrypoint-initdb.d/initialize_security.sql; \
     sed -i "s/<MYSQL_USER>/${MYSQL_USER}/" /docker-entrypoint-initdb.d/initialize_security.sql
 
 EXPOSE 3306
