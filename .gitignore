@@ -4,6 +4,4 @@ build/
 /.idea/
 /*.iml
 
-env.list
-
 scratch.md
