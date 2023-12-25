@@ -25,6 +25,6 @@ jobs:
       - name: Update DockerHub Description
         uses: peter-evans/dockerhub-description@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: stefanneuhaus
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           repository: stefanneuhaus/dependencycheck-central-mysql
