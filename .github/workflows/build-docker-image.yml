@@ -13,4 +13,11 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Build Docker image
-        run: docker build -t dependencycheck-central-mysql:$(date +%s) .
+        run: docker build -t stefanneuhaus/dependencycheck-central-mysql:latest .
+
+      - name: Login and push to DockerHub
+        env:
+          DH_PWD: ${{ secrets.DOCKERHUB_PASSWORD }}
+        run: |
+          echo $DH_PWD | docker login -u stefanneuhaus --password-stdin
+          docker push stefanneuhaus/dependencycheck-central-mysql:latest
