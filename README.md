@@ -22,7 +22,7 @@ docker run -p 3306:3306 stefanneuhaus/dependencycheck-central-mysql
 
 #### NVD API key
 
-To have a faster synchronization proces, you should apply for an NVD API key.
+To have a faster synchronization process, you should apply for an NVD API key.
 Get one [at the NVD website](https://nvd.nist.gov/developers/request-an-api-key).
 If you have one, start your Docker container with `-e NVD_API_KEY=<Your API key here>`.
 
