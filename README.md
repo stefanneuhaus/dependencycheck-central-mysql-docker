@@ -26,7 +26,7 @@ To have a faster synchronization proces, you should apply for an NVD API key.
 Get one [at the NVD website](https://nvd.nist.gov/developers/request-an-api-key).
 If you have one, start your Docker container with `-e NVD_API_KEY=<Your API key here>`.
 
-### Analysis clients
+### Analysis Clients
 
 All kinds of analysis clients are supported: Gradle, Maven, Ant, Jenkins, CLI. Apply the following changes to your build file:
 - add buildscript dependency for `com.mysql:mysql-connector-j:8.2.0`
@@ -64,9 +64,9 @@ Start the Dependency Analysis:
 ```
 
 
-## Database updates
+## Database Updates
 
-Updates of the Database are triggered every 2 minutes. Note that the initial update can take quite some time (~50 min on my machine). In order to get reliable analysis results the initial update must have finished successfully. Subsequent updates are incremental ones and should finish within a couple of seconds.
+Updates of the Database are triggered every 2 minutes. The initial update can take quite some time (~50 min on my machine). In order to get reliable analysis results the initial update must have finished successfully. Subsequent updates are incremental ones and should finish within a couple of seconds.
 
 
 ## Compatibility

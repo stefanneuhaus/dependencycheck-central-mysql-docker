@@ -21,3 +21,10 @@ jobs:
         run: |
           echo $DH_PWD | docker login -u stefanneuhaus --password-stdin
           docker push stefanneuhaus/dependencycheck-central-mysql:latest
+
+      - name: Update DockerHub Description
+        uses: peter-evans/dockerhub-description@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: stefanneuhaus/dependencycheck-central-mysql
