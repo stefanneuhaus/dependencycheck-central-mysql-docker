@@ -1,0 +1,6 @@
+commit-message-incrementing: Disabled
+
+branches:
+  release:
+    increment: Patch
+

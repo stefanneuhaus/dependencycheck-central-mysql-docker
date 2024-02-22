@@ -1,0 +1,75 @@
+stages:
+  - .pre
+  - package
+  - test
+
+# source of this code: https://gitlab.com/guided-explorations/devops-patterns/utterly-automated-versioning/
+define next version:
+  stage: .pre
+  image:
+    name: nauni1977/owasp-db-cache:latest
+  script:
+    - |
+      gitversion /output buildserver
+      
+      # We could just collect the output file gitversion.properties (with artifacts:report:dotenv: gitversion.properties as it is already in DOTENV format,
+      # however it contains ~33 variables which unnecessarily consumes many of the 50 max DOTENV variables of the free GitLab version.
+      # Limits are higher for licensed editions, see https://docs.gitlab.com/ee/ci/yaml/artifacts_reports.html#artifactsreportsdotenv
+      grep 'GitVersion_LegacySemVer='                   gitversion.properties >> version.env
+      grep 'GitVersion_SemVer='                         gitversion.properties >> version.env
+      grep 'GitVersion_FullSemVer='                     gitversion.properties | sed -r 's/\+/_/g' >> version.env
+      grep 'GitVersion_Major='                          gitversion.properties >> version.env
+      grep 'GitVersion_Minor='                          gitversion.properties >> version.env
+      grep 'GitVersion_Patch='                          gitversion.properties >> version.env
+      grep 'GitVersion_MajorMinorPatch='                gitversion.properties >> version.env
+      grep 'GitVersion_CommitsSinceVersionSource='      gitversion.properties >> version.env
+      
+      cat version.env
+  
+  # artifacts are only moved to the next stage - not to other jobs depending on this job at same stage
+  artifacts:
+    paths:
+      - version.env
+    reports:
+      dotenv: version.env
+
+build image:
+  stage: package
+  dependencies:
+    - define next version
+  ## run only if the build is triggered by schedule - maybe one time each day ... not at every commit
+  #  rules:
+  #    - if: $CI_PIPELINE_SOURCE == "schedule"
+  image: docker
+  services:
+    - docker:dind
+  script:
+    - cat version.env
+    - echo "GitVersion_LegacySemVer=${GitVersion_LegacySemVer}"
+    - VERSION=${GitVersion_LegacySemVer}
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER  $CI_REGISTRY --password-stdin
+    - docker build -t $CI_REGISTRY_IMAGE .
+    - docker push $CI_REGISTRY_IMAGE
+    - docker tag $CI_REGISTRY_IMAGE $CI_REGISTRY_IMAGE:${VERSION}
+    - docker push $CI_REGISTRY_IMAGE:${VERSION}
+
+test without image:
+  stage: test
+  image: python:3.10
+  script:
+    - python --version
+    - pip --version
+    - pip install pytest
+    - pytest --version
+    - echo "do some complex stuff now"
+
+test with image:
+  stage: test
+  dependencies:
+    - build image
+  image: $CI_REGISTRY_IMAGE
+  script:
+    - python --version
+    - pip --version
+    - pytest --version
+    - echo "do some complex stuff now"
