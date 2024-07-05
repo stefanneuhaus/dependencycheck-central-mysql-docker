@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Build Docker image
         run: docker build -t stefanneuhaus/dependencycheck-central-mysql:latest .
@@ -23,7 +23,7 @@ jobs:
           docker push stefanneuhaus/dependencycheck-central-mysql:latest
 
       - name: Update DockerHub Description
-        uses: peter-evans/dockerhub-description@v3
+        uses: peter-evans/dockerhub-description@v4
         with:
           username: stefanneuhaus
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
