@@ -29,7 +29,7 @@ If you have one, start your Docker container with `-e NVD_API_KEY=<Your API key 
 ### Analysis Clients
 
 All kinds of analysis clients are supported: Gradle, Maven, Ant, Jenkins, CLI. Apply the following changes to your build file:
-- add buildscript dependency for `com.mysql:mysql-connector-j:8.2.0`
+- add buildscript dependency for `com.mysql:mysql-connector-j`
 - disable database updates triggered by your project: `autoUpdate = false`
 - add database connection parameters: `data { ... }`
 
@@ -40,8 +40,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:9.0.6'
-        classpath 'com.mysql:mysql-connector-j:8.2.0'
+        classpath 'org.owasp:dependency-check-gradle:10.0.1'
+        classpath 'com.mysql:mysql-connector-j:8.4.0'
     }
 }
 
