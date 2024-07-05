@@ -71,17 +71,18 @@ Updates of the Database are triggered every 2 minutes. The initial update can ta
 
 ## Compatibility
 
-|             Client |  Server |
-|-------------------:|--------:|
-|         `>= 8.0.0` | `9.0.8` |
-|         `>= 8.0.0` | `8.0.0` |
-|            `7.4.4` | `7.4.4` |
-|   `[6.3.0; 7.4.3]` | `6.5.3` |
-|   `[6.1.3; 6.2.2]` | `6.2.0` |
-|   `[6.0.0; 6.1.1]` | `6.0.2` |
-| `[5.0.0; 5.3.2.1]` | `5.0.0` |
-|   `[1.4.1; 4.0.2]` | `4.0.2` |
-|          `< 1.4.1` |    n.a. |
+|             Client |   Server |
+|-------------------:|---------:|
+|         `>= 6.3.0` | `10.0.1` |
+|         `>= 6.3.0` |  `9.0.8` |
+|         `>= 6.3.0` |  `8.0.0` |
+|         `>= 6.3.0` |  `7.4.4` |
+|   `[6.3.0; 7.4.3]` |  `6.5.3` |
+|   `[6.1.3; 6.2.2]` |  `6.2.0` |
+|   `[6.0.0; 6.1.1]` |  `6.0.2` |
+| `[5.0.0; 5.3.2.1]` |  `5.0.0` |
+|   `[1.4.1; 4.0.2]` |  `4.0.2` |
+|          `< 1.4.1` |     n.a. |
 
 The server is not designed for updating its database structure manually. If you update your client to a version which is incompatible with your server version, 
 you should just throw away the old server container and start a new one from a compatible image from scratch.
