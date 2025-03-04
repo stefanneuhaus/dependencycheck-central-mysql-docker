@@ -38,9 +38,10 @@ Example (Gradle):
 buildscript {
     repositories {
         mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:10.0.2'
+        classpath 'org.owasp:dependency-check-gradle:12.1.0'
         classpath 'com.mysql:mysql-connector-j:8.4.0'
     }
 }
@@ -73,6 +74,7 @@ Updates of the Database are triggered every 2 minutes. The initial update can ta
 
 |             Client |   Server |
 |-------------------:|---------:|
+|         `>= 6.3.0` | `12.1.2` |
 |         `>= 6.3.0` | `10.0.2` |
 |         `>= 6.3.0` |  `9.0.8` |
 |         `>= 6.3.0` |  `8.0.0` |
