@@ -19,7 +19,7 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath 'org.owasp:dependency-check-gradle:12.1.0'
+        classpath 'org.owasp:dependency-check-gradle:12.2.2'
         classpath 'com.mysql:mysql-connector-j:8.4.0'
     }
 }
