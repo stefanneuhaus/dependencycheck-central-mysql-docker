@@ -76,6 +76,7 @@ Updates of the Database are triggered every 2 minutes. The initial update can ta
 |              Client |   Server |
 |--------------------:|---------:|
 |         `>= 6.3.0`  | `12.2.2` |
+|         `>= 6.3.0`  | `11.0.0` |
 |         `>= 6.3.0`  | `10.0.2` |
 |         `>= 6.3.0`  |  `9.0.8` |
 |         `>= 6.3.0`  |  `8.0.0` |
