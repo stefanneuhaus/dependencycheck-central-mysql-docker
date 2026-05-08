@@ -42,7 +42,7 @@ buildscript {
     }
     dependencies {
         classpath 'org.owasp:dependency-check-gradle:12.2.2'
-        classpath 'com.mysql:mysql-connector-j:8.4.0'
+        classpath 'com.mysql:mysql-connector-j:9.7.0'
     }
 }
 
@@ -56,6 +56,7 @@ dependencyCheck {
         username = "dc"
         password = "dc"
     }
+    analyzers.ossIndex.enabled = false
 }
 ```
 
@@ -74,8 +75,7 @@ Updates of the Database are triggered every 2 minutes. The initial update can ta
 
 |              Client |   Server |
 |--------------------:|---------:|
-|         `>= 12.2.2` | `12.2.2` |
-|         `>= 6.3.0`  | `12.1.2` |
+|         `>= 6.3.0`  | `12.2.2` |
 |         `>= 6.3.0`  | `10.0.2` |
 |         `>= 6.3.0`  |  `9.0.8` |
 |         `>= 6.3.0`  |  `8.0.0` |

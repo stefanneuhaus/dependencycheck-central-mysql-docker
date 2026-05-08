@@ -1,7 +1,7 @@
-FROM oraclelinux:9-slim AS supercronic
+FROM oraclelinux:10-slim AS supercronic
 
-ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.2.33/supercronic-linux-amd64 \
-    SUPERCRONIC_SHA1SUM=71b0d58cc53f6bd72cf2f293e09e294b79c666d8 \
+ENV SUPERCRONIC_URL=https://github.com/aptible/supercronic/releases/download/v0.2.45/supercronic-linux-amd64 \
+    SUPERCRONIC_SHA1SUM=e894b193bea75a5ee644e700c59e30eedc804cf7 \
     SUPERCRONIC=supercronic-linux-amd64
 
 RUN curl -fsSLO "$SUPERCRONIC_URL" \
@@ -11,7 +11,7 @@ RUN curl -fsSLO "$SUPERCRONIC_URL" \
  && ln -s "/usr/local/bin/${SUPERCRONIC}" /usr/local/bin/supercronic
 
 
-FROM mysql:8.4.4
+FROM mysql:8.4.9
 
 LABEL maintainer="Stefan Neuhaus <stefan@stefanneuhaus.org>"
 
@@ -24,7 +24,7 @@ ENV MYSQL_DATABASE=dependencycheck \
 WORKDIR /dependencycheck
 
 RUN set -ex && \
-    microdnf install java-21-openjdk-headless procps; \
+    microdnf install java-25-openjdk-headless procps; \
     microdnf clean all
 
 COPY overlays/wrapper.sh /
