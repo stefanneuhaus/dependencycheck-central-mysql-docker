@@ -5,7 +5,7 @@ buildscript {
     }
     dependencies {
         classpath 'org.owasp:dependency-check-gradle:12.2.2'
-        classpath 'com.mysql:mysql-connector-j:8.4.0'
+        classpath 'com.mysql:mysql-connector-j:9.7.0'
     }
 }
 
@@ -19,6 +19,7 @@ dependencyCheck {
         username = "dc"
         password = "dc"
     }
+    analyzers.ossIndex.enabled = false
 }
 
 
