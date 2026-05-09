@@ -56,7 +56,6 @@ dependencyCheck {
         username = "dc"
         password = "dc"
     }
-    analyzers.ossIndex.enabled = false
 }
 ```
 
