@@ -33,14 +33,14 @@ COPY overlays/docker-entrypoint-initdb.d /docker-entrypoint-initdb.d/
 
 RUN set -ex && \
     /dependencycheck/gradlew wrapper; \
-    echo "0 */2 * * *  /dependencycheck/update.sh" > /dependencycheck/database-update-schedule; \
+    echo "@hourly  /dependencycheck/update.sh" > /dependencycheck/database-update-schedule; \
     chown --recursive mysql:mysql /dependencycheck
 
 COPY --from=supercronic /usr/local/bin/supercronic /usr/local/bin/
 
 RUN set -ex && \
-    cat /dev/urandom | tr -dc _A-Za-z0-9 | head -c 32 >/dependencycheck/dc-update.pwd; \
-    chmod 400 /dependencycheck/dc-update.pwd; \
+    PASSWORD="$(tr -dc 'A-Za-z0-9_' </dev/urandom | head -c 32)"; \
+    echo "$PASSWORD" >/dependencycheck/dc-update.pwd; \
     sed -i "s/<DC_UPDATE_PASSWORD>/$(cat /dependencycheck/dc-update.pwd)/" /dependencycheck/build.gradle; \
     sed -i "s/<DC_UPDATE_PASSWORD>/$(cat /dependencycheck/dc-update.pwd)/" /docker-entrypoint-initdb.d/initialize_security.sql; \
     sed -i "s/<MYSQL_USER>/${MYSQL_USER}/" /docker-entrypoint-initdb.d/initialize_security.sql

@@ -8,5 +8,11 @@ if [ -z "${NVD_API_KEY}" ]; then
   echo "--------------------------------------------------------------------------------"
 fi
 
+# Schedule regular updates
 supercronic /dependencycheck/database-update-schedule &
+
+# Trigger initial update (once DB ready)
+until mysqladmin ping -udc -pdc; do sleep 1; done && /dependencycheck/update.sh && echo "Initial update done." &
+
+# Start MYSQL
 /usr/local/bin/docker-entrypoint.sh --user=root

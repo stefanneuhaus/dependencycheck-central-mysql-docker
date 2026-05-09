@@ -67,7 +67,7 @@ Start the Dependency Analysis:
 
 ## Database Updates
 
-Updates of the Database are triggered every 2 minutes. The initial update can take quite some time (~15 min on my machine with an NVD API key). In order to get reliable analysis results the initial update must have finished successfully. Subsequent updates are incremental ones and should finish within a couple of seconds.
+Updates of the Database are triggered hourly. Upon container startup an initial update is triggered which can take quite some time (~15 min on my machine with an NVD API key). In order to get reliable analysis results the initial update must have finished successfully. Subsequent updates are incremental ones and should finish within a couple of seconds.
 
 
 ## Compatibility
